@@ -123,19 +123,53 @@ where the sums are over all the training examples $C_m$ in the current mini-batc
 
 ***
 
-**Backpropagation**
+**Backpropagation**: is about understanding how changing weights and biases changes the cost function in the nn
+
+Some introduction to the notation:
 
 > We'll use $w^{l}_{jk}$ to denote the weight for the connection from the $k^{th}$ neuron in the $(l-1)^{th}$ layer to the $j^{th}$ neuron in the $l^{th}$ layer.
 >
 > Similarily, we use $b_j^l$ for the bias of the $j^{th}$ neuron in the $l^{th}$ layer.
 >
 > And we use $a^l_j$ for the activation of the $j^{th}$ neuron in the $l^{th}$ layer.
+>
+> With the notation, we get the equation(element-wise):
+> $$
+> a^l_j = \sigma(\underset{k}{\sum}w^l_{jk}a^{l-1}_k + b^l_j)
+> $$
 
 ![notation in Backpropagation section](C:\My\0ScientificReasearch\Notes\AI\NN\img\backpropa_notation.png)
 
 ![](C:\My\0ScientificReasearch\Notes\AI\NN\img\backpropa_notation_2.png)
 
+To vectorize the equation, we rewrite the equation as:
+$$
+a^l = \sigma (w^l a^{l-1}+ b^l)
+$$
 
+> The vector $w^l$ is a 2D array. The row corresponds to the weights from the $(l-1)^{th}$ layer to the $l^{th}$ layer. The column corresponds to the nuerons in the $(l-1)^{th}$ layer. 
+>
+> Therefore, the size of the $w^l$ equals to (the neuron numbers of the $l^{th}$ layer) × (the neuron numbers of the $(l-1)^{th}$ layer). That's why we use the notation we defined as above.
+
+
+
+Before we use backpropagation to compute the partial derivatives, we have 2 assumptions:
+
+> **Assumption 1**
+>
+> The cost function can be rewrite as:
+> $$
+> C(w,x) = \frac{1}{n}\underset{x}{\sum}C_x
+> $$
+> **Assumption 2**
+>
+> The output can be rewrite as the function of the output layer activations.
+
+
+
+**The four fundamental equations in backpropagation**
+
+> $\delta^l_j$: the *error* of the $j^{th}$ neuron in the $l^{th}$ layer
 
 
 
