@@ -123,7 +123,7 @@ Contribution:
 
 针对尝试使用max函数来优化目标的困难，作者提出：
 
-In order to make the learning problem easier, we propose to train a MIL model by optimizing the **log-likelihood function** where the bag label is distributed according to the Bernoulli distribution with the parameter $θ(X) ∈ [0, 1]$, i.e., the probability of $Y = 1$ given the bag of instances $X$.
+In order to make the learning problem easier, we propose to train a MIL model by optimizing the **log-likelihood function**（one of the cost functions）where the bag label is distributed according to the Bernoulli distribution with the parameter $θ(X) ∈ [0, 1]$, i.e., the probability of $Y = 1$ given the bag of instances $X$.
 
 
 
@@ -155,7 +155,20 @@ $$
 
 ***Attention-based MIL Pooling[^1]***：
 
-预先定义好的和不可训练的算子（我的理解是不能进行参数化的算子）不能通过调整任务和数据来获得更好的分类结果，而灵活且适应性强的池化算子可以做到这一点。
+预先定义好的和不可训练的算子（我的理解是不能进行参数化的算子）不能通过调整任务和数据来获得更好的分类结果，而灵活且适应性强的池化算子可以做到这一点。基于此，作者提出了attention-based池化方法：
+$$
+z = \sum ^{K}_{k=1} a_k h_k \\
+a_k = \frac{e^{w^Ttanh(Vh_k^T)}}{\sum^{K}_{j=1} e^{w^Ttanh(Vh_j^T)}}
+$$
+where, $w∈R^{L×1}$ and $V ∈R^{L×M}$ are parameters.
+
+该形式可以看作Theorem 1的形式，$a_k$可以看作$f$变换的一部分.
+
+
+
+
+
+
 
 
 
